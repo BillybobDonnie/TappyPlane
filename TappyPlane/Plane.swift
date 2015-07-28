@@ -10,7 +10,18 @@ import SpriteKit
 
 class Plane: SKSpriteNode {
     
+    let keyPlaneAnimation = "PlaneAnimation"
+    
     var planeAnimations: [SKAction]!
+    var engineRunning = false {
+        didSet {
+            if engineRunning {
+                self.actionForKey(keyPlaneAnimation)?.speed = 1.0
+            } else {
+                self.actionForKey(keyPlaneAnimation)?.speed = 0.0
+            }
+        }
+    }
     
     init() {
         let texture = SKTexture(imageNamed: "planeBlue1")
@@ -32,7 +43,13 @@ class Plane: SKSpriteNode {
     }
     
     func setRandomColor() {
-        self.runAction(planeAnimations[Int(arc4random_uniform(UInt32(planeAnimations.count)))])
+        self.removeActionForKey(keyPlaneAnimation)
+        
+        self.runAction(planeAnimations[Int(arc4random_uniform(UInt32(planeAnimations.count)))], withKey: keyPlaneAnimation)
+        
+        if !engineRunning {
+            self.actionForKey(keyPlaneAnimation)?.speed = 0.0
+        }
     }
     
     func animationFromArray(textureNames: [String], duration: CGFloat) -> SKAction {

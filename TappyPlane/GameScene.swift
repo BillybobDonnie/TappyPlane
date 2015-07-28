@@ -23,6 +23,13 @@ class GameScene: SKScene {
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
         world.addChild(player)
     }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        for touch in touches {
+            player.engineRunning = !player.engineRunning
+            player.setRandomColor()
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
