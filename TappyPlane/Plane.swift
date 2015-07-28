@@ -16,6 +16,7 @@ class Plane: SKSpriteNode {
     var puffTrailBirthRate: CGFloat?
     
     var planeAnimations: [SKAction]!
+    var accelerating = false
     var engineRunning = false {
         didSet {
             if engineRunning {
@@ -33,6 +34,9 @@ class Plane: SKSpriteNode {
     init() {
         let texture = SKTexture(imageNamed: "planeBlue1")
         super.init(texture: texture, color: nil, size: texture.size())
+        
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        self.physicsBody?.mass = 0.08
         
         planeAnimations = []
         
@@ -81,6 +85,12 @@ class Plane: SKSpriteNode {
         let frameTime = duration / CGFloat(frames.count)
         
         return SKAction.repeatActionForever(SKAction.animateWithTextures(frames, timePerFrame: NSTimeInterval(frameTime), resize: false, restore: false))
+    }
+    
+    func update() {
+        if accelerating {
+            self.physicsBody?.applyForce(CGVectorMake(0, 100))
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
