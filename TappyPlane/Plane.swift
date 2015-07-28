@@ -12,13 +12,20 @@ class Plane: SKSpriteNode {
     
     let keyPlaneAnimation = "PlaneAnimation"
     
+    var puffTrailEmitter: SKEmitterNode?
+    var puffTrailBirthRate: CGFloat?
+    
     var planeAnimations: [SKAction]!
     var engineRunning = false {
         didSet {
             if engineRunning {
                 self.actionForKey(keyPlaneAnimation)?.speed = 1.0
+                if let particleBirthRate = puffTrailBirthRate {
+                    puffTrailEmitter?.particleBirthRate = particleBirthRate
+                }
             } else {
                 self.actionForKey(keyPlaneAnimation)?.speed = 0.0
+                puffTrailEmitter?.particleBirthRate = 0.0
             }
         }
     }
@@ -36,6 +43,17 @@ class Plane: SKSpriteNode {
                 for (planeColor, textureNames) in animations {
                     planeAnimations.append(animationFromArray(textureNames as! [String], duration: 0.4))
                 }
+            }
+        }
+        
+        // puff trail particle effect
+        if let particleFile = NSBundle.mainBundle().pathForResource("PlanePuffTrail", ofType: "sks") {
+            if let emitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(particleFile) as? SKEmitterNode {
+                puffTrailEmitter = emitterNode
+                puffTrailEmitter!.position = CGPointMake(-self.size.width/2, -10)
+                self.addChild(puffTrailEmitter!)
+                puffTrailBirthRate = puffTrailEmitter?.particleBirthRate
+                puffTrailEmitter?.particleBirthRate = 0
             }
         }
         
