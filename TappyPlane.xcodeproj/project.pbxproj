@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74A1B671DD4003C18BE /* AppDelegate.swift */; };
-		24BDE74D1B671DD4003C18BE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE74C1B671DD4003C18BE /* GameScene.sks */; };
 		24BDE74F1B671DD4003C18BE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74E1B671DD4003C18BE /* GameScene.swift */; };
 		24BDE7511B671DD4003C18BE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE7501B671DD4003C18BE /* GameViewController.swift */; };
 		24BDE7541B671DD4003C18BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE7521B671DD4003C18BE /* Main.storyboard */; };
@@ -31,7 +30,6 @@
 		24BDE7451B671DD3003C18BE /* TappyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TappyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BDE7491B671DD4003C18BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BDE74A1B671DD4003C18BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		24BDE74C1B671DD4003C18BE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		24BDE74E1B671DD4003C18BE /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		24BDE7501B671DD4003C18BE /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		24BDE7531B671DD4003C18BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				24BDE74A1B671DD4003C18BE /* AppDelegate.swift */,
-				24BDE74C1B671DD4003C18BE /* GameScene.sks */,
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
 				24BDE7501B671DD4003C18BE /* GameViewController.swift */,
 				24BDE7521B671DD4003C18BE /* Main.storyboard */,
@@ -200,7 +197,6 @@
 			files = (
 				24BDE7591B671DD4003C18BE /* LaunchScreen.xib in Resources */,
 				24BDE7561B671DD4003C18BE /* Images.xcassets in Resources */,
-				24BDE74D1B671DD4003C18BE /* GameScene.sks in Resources */,
 				24BDE7541B671DD4003C18BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,8 +345,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TappyPlane/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -359,8 +357,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = TappyPlane/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
