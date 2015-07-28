@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		242695881B672B7A00E69AFE /* Graphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 242695871B672B7A00E69AFE /* Graphics.atlas */; };
+		2426958A1B672C5800E69AFE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242695891B672C5800E69AFE /* Plane.swift */; };
 		24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74A1B671DD4003C18BE /* AppDelegate.swift */; };
 		24BDE74F1B671DD4003C18BE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74E1B671DD4003C18BE /* GameScene.swift */; };
 		24BDE7511B671DD4003C18BE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE7501B671DD4003C18BE /* GameViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		242695871B672B7A00E69AFE /* Graphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Graphics.atlas; sourceTree = "<group>"; };
+		242695891B672C5800E69AFE /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		24BDE7451B671DD3003C18BE /* TappyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TappyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BDE7491B671DD4003C18BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BDE74A1B671DD4003C18BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				242695871B672B7A00E69AFE /* Graphics.atlas */,
 				24BDE74A1B671DD4003C18BE /* AppDelegate.swift */,
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
+				242695891B672C5800E69AFE /* Plane.swift */,
 				24BDE7501B671DD4003C18BE /* GameViewController.swift */,
 				24BDE7521B671DD4003C18BE /* Main.storyboard */,
 				24BDE7551B671DD4003C18BE /* Images.xcassets */,
@@ -221,6 +224,7 @@
 			files = (
 				24BDE74F1B671DD4003C18BE /* GameScene.swift in Sources */,
 				24BDE7511B671DD4003C18BE /* GameViewController.swift in Sources */,
+				2426958A1B672C5800E69AFE /* Plane.swift in Sources */,
 				24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
