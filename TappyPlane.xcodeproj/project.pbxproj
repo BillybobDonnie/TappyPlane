@@ -16,7 +16,7 @@
 		24BDE7561B671DD4003C18BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE7551B671DD4003C18BE /* Images.xcassets */; };
 		24BDE7591B671DD4003C18BE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE7571B671DD4003C18BE /* LaunchScreen.xib */; };
 		24BDE7651B671DD4003C18BE /* TappyPlaneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE7641B671DD4003C18BE /* TappyPlaneTests.swift */; };
-		24C7334F1B6748C700EE2F43 /* PlanesAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24C7334E1B6748C700EE2F43 /* PlanesAnimations.plist */; };
+		24C7334F1B6748C700EE2F43 /* PlaneAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24C7334E1B6748C700EE2F43 /* PlaneAnimations.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +43,7 @@
 		24BDE75E1B671DD4003C18BE /* TappyPlaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TappyPlaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BDE7631B671DD4003C18BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BDE7641B671DD4003C18BE /* TappyPlaneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappyPlaneTests.swift; sourceTree = "<group>"; };
-		24C7334E1B6748C700EE2F43 /* PlanesAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlanesAnimations.plist; sourceTree = "<group>"; };
+		24C7334E1B6748C700EE2F43 /* PlaneAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlaneAnimations.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +90,7 @@
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
 				242695891B672C5800E69AFE /* Plane.swift */,
 				24BDE7501B671DD4003C18BE /* GameViewController.swift */,
-				24C7334E1B6748C700EE2F43 /* PlanesAnimations.plist */,
+				24C7334E1B6748C700EE2F43 /* PlaneAnimations.plist */,
 				24BDE7521B671DD4003C18BE /* Main.storyboard */,
 				24BDE7551B671DD4003C18BE /* Images.xcassets */,
 				24BDE7571B671DD4003C18BE /* LaunchScreen.xib */,
@@ -204,7 +204,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24C7334F1B6748C700EE2F43 /* PlanesAnimations.plist in Resources */,
+				24C7334F1B6748C700EE2F43 /* PlaneAnimations.plist in Resources */,
 				24BDE7591B671DD4003C18BE /* LaunchScreen.xib in Resources */,
 				24BDE7561B671DD4003C18BE /* Images.xcassets in Resources */,
 				242695881B672B7A00E69AFE /* Graphics.atlas in Resources */,
