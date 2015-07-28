@@ -20,6 +20,7 @@ class Plane: SKSpriteNode {
     var engineRunning = false {
         didSet {
             if engineRunning {
+                puffTrailEmitter?.targetNode = self.parent
                 self.actionForKey(keyPlaneAnimation)?.speed = 1.0
                 if let particleBirthRate = puffTrailBirthRate {
                     puffTrailEmitter?.particleBirthRate = particleBirthRate

@@ -24,8 +24,9 @@ class GameScene: SKScene {
         player = Plane()
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
-        player.engineRunning = true
         world.addChild(player)
+        
+        player.engineRunning = true
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
