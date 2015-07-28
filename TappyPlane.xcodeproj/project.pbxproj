@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242695881B672B7A00E69AFE /* Graphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 242695871B672B7A00E69AFE /* Graphics.atlas */; };
 		24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74A1B671DD4003C18BE /* AppDelegate.swift */; };
 		24BDE74F1B671DD4003C18BE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE74E1B671DD4003C18BE /* GameScene.swift */; };
 		24BDE7511B671DD4003C18BE /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE7501B671DD4003C18BE /* GameViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		242695871B672B7A00E69AFE /* Graphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Graphics.atlas; sourceTree = "<group>"; };
 		24BDE7451B671DD3003C18BE /* TappyPlane.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TappyPlane.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BDE7491B671DD4003C18BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BDE74A1B671DD4003C18BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		24BDE7471B671DD4003C18BE /* TappyPlane */ = {
 			isa = PBXGroup;
 			children = (
+				242695871B672B7A00E69AFE /* Graphics.atlas */,
 				24BDE74A1B671DD4003C18BE /* AppDelegate.swift */,
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
 				24BDE7501B671DD4003C18BE /* GameViewController.swift */,
@@ -197,6 +200,7 @@
 			files = (
 				24BDE7591B671DD4003C18BE /* LaunchScreen.xib in Resources */,
 				24BDE7561B671DD4003C18BE /* Images.xcassets in Resources */,
+				242695881B672B7A00E69AFE /* Graphics.atlas in Resources */,
 				24BDE7541B671DD4003C18BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +421,7 @@
 				24BDE76A1B671DD4003C18BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		24BDE76B1B671DD4003C18BE /* Build configuration list for PBXNativeTarget "TappyPlaneTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +430,7 @@
 				24BDE76D1B671DD4003C18BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
