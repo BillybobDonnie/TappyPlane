@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var background: ScrollingLayer!
     var foreground: ScrollingLayer!
+    var obstacles: ObstacleLayer!
     
     var lastCallTime: NSTimeInterval = 0
     
@@ -52,6 +53,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.scrolling = true
         world.addChild(background)
         
+        // setup obstacles
+        obstacles = ObstacleLayer()
+        obstacles.horizontalScrollingSpeed = -80
+        obstacles.marker = self.size.width + obstacles.markerBuffer
+        obstacles.scrolling = true
+        obstacles.floor = 0
+        obstacles.ceiling = self.size.height
+        world.addChild(obstacles)
+        
         // setup foreground
         foreground = ScrollingLayer(tileSpriteNodes: [generateGroundTile(), generateGroundTile(), generateGroundTile()])
         foreground.position = CGPointZero
@@ -64,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.affectedByGravity = false
         world.addChild(player)
         
-        player.engineRunning = true
+        newGame()
     }
     
     func generateGroundTile() -> SKSpriteNode {
@@ -108,6 +118,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // reset layers
         background.position = CGPointZero
         background.layoutTiles()
+        obstacles.position = CGPointZero
+        obstacles.reset()
+        obstacles.scrolling = false
         foreground.position = CGPointZero
         foreground.layoutTiles()
         
@@ -124,6 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 player.physicsBody?.affectedByGravity = true
                 player.accelerating = true
+                obstacles.scrolling = true
             }
         }
     }
@@ -147,6 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if !player.crashed {
             background.update(timeElapsed)
+            obstacles.update(timeElapsed)
             foreground.update(timeElapsed)
         }
     }
