@@ -104,10 +104,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func newGame() {
+        // reset layers
+        background.position = CGPointZero
+        background.layoutTiles()
+        foreground.position = CGPointZero
+        foreground.layoutTiles()
+        
+        // reset plane
+        player.position = CGPointMake(self.size.width/2, self.size.height/2)
+        player.crashed = false
+        player.engineRunning = true
+        player.physicsBody?.affectedByGravity = false
+        player.zRotation = 0
+        player.physicsBody?.velocity = CGVectorMake(0, 0)
+        player.physicsBody?.angularVelocity = 0
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch in touches {
-            player.physicsBody?.affectedByGravity = true
-            player.accelerating = true
+            if player.crashed {
+                newGame()
+            } else {
+                player.physicsBody?.affectedByGravity = true
+                player.accelerating = true
+            }
         }
     }
     
