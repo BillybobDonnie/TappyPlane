@@ -16,6 +16,8 @@ class GameScene: SKScene {
     let minFPS: NSTimeInterval = 10/60
     
     var background: ScrollingLayer!
+    var foreground: ScrollingLayer!
+    
     var lastCallTime: NSTimeInterval = 0
     
     override init(size: CGSize) {
@@ -44,12 +46,24 @@ class GameScene: SKScene {
         background.scrolling = true
         world.addChild(background)
         
+        // setup foreground
+        foreground = ScrollingLayer(tileSpriteNodes: [generateGroundTile(), generateGroundTile(), generateGroundTile()])
+        foreground.position = CGPointZero
+        foreground.horizontalScrollingSpeed = -80
+        foreground.scrolling = true
+        world.addChild(foreground)
+        
         player = Plane()
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
         world.addChild(player)
         
         player.engineRunning = true
+    }
+    
+    func generateGroundTile() -> SKSpriteNode {
+        let graphics = SKTextureAtlas(named: "Graphics")
+        return SKSpriteNode(texture: graphics.textureNamed("groundGrass"))
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -76,6 +90,7 @@ class GameScene: SKScene {
         
         player.update()
         background.update(timeElapsed)
+        foreground.update(timeElapsed)
     }
 
     required init?(coder aDecoder: NSCoder) {
