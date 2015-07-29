@@ -129,6 +129,16 @@ class Plane: SKSpriteNode {
             self.physicsBody?.applyForce(CGVectorMake(0, 100))
         }
     }
+    
+    func reset() {
+        self.crashed = false
+        self.engineRunning = true
+        self.zRotation = 0
+        self.physicsBody?.velocity = CGVectorMake(0, 0)
+        self.physicsBody?.angularVelocity = 0
+        
+        setRandomColor()
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

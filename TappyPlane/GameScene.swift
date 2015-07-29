@@ -113,12 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // reset plane
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
-        player.crashed = false
-        player.engineRunning = true
         player.physicsBody?.affectedByGravity = false
-        player.zRotation = 0
-        player.physicsBody?.velocity = CGVectorMake(0, 0)
-        player.physicsBody?.angularVelocity = 0
+        player.reset()
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
