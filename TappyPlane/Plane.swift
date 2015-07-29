@@ -128,6 +128,11 @@ class Plane: SKSpriteNode {
         if accelerating {
             self.physicsBody?.applyForce(CGVectorMake(0, 100))
         }
+        
+        if !crashed {
+            // limit rotation to 1 radian
+            self.zRotation = fmax(fmin(self.physicsBody!.velocity.dy, 400), -400)/400
+        }
     }
     
     func reset() {
