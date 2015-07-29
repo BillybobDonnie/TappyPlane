@@ -36,14 +36,33 @@ class Plane: SKSpriteNode {
         let texture = SKTexture(imageNamed: "planeBlue1")
         super.init(texture: texture, color: nil, size: texture.size())
         
-        self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
+        let offsetX = self.frame.size.width * self.anchorPoint.x;
+        let offsetY = self.frame.size.height * self.anchorPoint.y;
+        
+        let path: CGMutablePathRef = CGPathCreateMutable();
+        
+        CGPathMoveToPoint(path, nil, 41 - offsetX, 21 - offsetY);
+        CGPathAddLineToPoint(path, nil, 36 - offsetX, 25 - offsetY);
+        CGPathAddLineToPoint(path, nil, 36 - offsetX, 34 - offsetY);
+        CGPathAddLineToPoint(path, nil, 11 - offsetX, 35 - offsetY);
+        CGPathAddLineToPoint(path, nil, 2 - offsetX, 30 - offsetY);
+        CGPathAddLineToPoint(path, nil, 2 - offsetX, 22 - offsetY);
+        CGPathAddLineToPoint(path, nil, 11 - offsetX, 11 - offsetY);
+        CGPathAddLineToPoint(path, nil, 10 - offsetX, 4 - offsetY);
+        CGPathAddLineToPoint(path, nil, 26 - offsetX, 1 - offsetY);
+        CGPathAddLineToPoint(path, nil, 40 - offsetX, 9 - offsetY);
+        
+        CGPathCloseSubpath(path);
+        
+        self.physicsBody = SKPhysicsBody(polygonFromPath: path)
+        
         self.physicsBody?.mass = 0.08
         
         planeAnimations = []
         
-        let path = NSBundle.mainBundle().pathForResource("PlaneAnimations", ofType: "plist")
+        let plistPath = NSBundle.mainBundle().pathForResource("PlaneAnimations", ofType: "plist")
         
-        if let path = path {
+        if let path = plistPath {
             if let animations = NSDictionary(contentsOfFile: path) {
                 for (planeColor, textureNames) in animations {
                     planeAnimations.append(animationFromArray(textureNames as! [String], duration: 0.4))
