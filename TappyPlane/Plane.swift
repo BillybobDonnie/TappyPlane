@@ -55,6 +55,8 @@ class Plane: SKSpriteNode {
         CGPathCloseSubpath(path);
         
         self.physicsBody = SKPhysicsBody(polygonFromPath: path)
+        self.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Plane
+        self.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Ground
         
         self.physicsBody?.mass = 0.08
         

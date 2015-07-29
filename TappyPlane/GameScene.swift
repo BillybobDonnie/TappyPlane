@@ -10,6 +10,11 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    struct PhysicsCategory {
+        static let Plane: UInt32    = 0
+        static let Ground: UInt32   = 0b1
+    }
+    
     var world: SKNode!
     var player: Plane!
     
@@ -85,6 +90,7 @@ class GameScene: SKScene {
         CGPathAddLineToPoint(path, nil, 1 - offsetX, 18 - offsetY);
         
         sprite.physicsBody = SKPhysicsBody(edgeChainFromPath: path)
+        sprite.physicsBody?.categoryBitMask = PhysicsCategory.Ground
         
         return sprite
     }
