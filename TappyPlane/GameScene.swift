@@ -21,6 +21,8 @@ class GameScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         
+        backgroundColor = SKColor(red: 213/255.0, green: 237/255.0, blue: 247/255.0, alpha: 1.0)
+        
         let graphics = SKTextureAtlas(named: "Graphics")
         
         self.physicsWorld.gravity = CGVectorMake(0, -5.5)
@@ -37,7 +39,7 @@ class GameScene: SKScene {
         }
         
         background = ScrollingLayer(tileSpriteNodes: backgroundTiles)
-        background.position = CGPointZero
+        background.position = CGPointMake(0, 30)
         background.horizontalScrollingSpeed = -60
         background.scrolling = true
         world.addChild(background)
