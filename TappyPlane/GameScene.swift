@@ -63,7 +63,30 @@ class GameScene: SKScene {
     
     func generateGroundTile() -> SKSpriteNode {
         let graphics = SKTextureAtlas(named: "Graphics")
-        return SKSpriteNode(texture: graphics.textureNamed("groundGrass"))
+        let sprite = SKSpriteNode(texture: graphics.textureNamed("groundGrass"))
+        sprite.anchorPoint = CGPointZero
+        
+        let offsetX = sprite.frame.size.width * sprite.anchorPoint.x;
+        let offsetY = sprite.frame.size.height * sprite.anchorPoint.y;
+        
+        let path: CGMutablePathRef = CGPathCreateMutable();
+        
+        CGPathMoveToPoint(path, nil, 403 - offsetX, 17 - offsetY);
+        CGPathAddLineToPoint(path, nil, 373 - offsetX, 35 - offsetY);
+        CGPathAddLineToPoint(path, nil, 316 - offsetX, 25 - offsetY);
+        CGPathAddLineToPoint(path, nil, 282 - offsetX, 9 - offsetY);
+        CGPathAddLineToPoint(path, nil, 236 - offsetX, 14 - offsetY);
+        CGPathAddLineToPoint(path, nil, 219 - offsetX, 29 - offsetY);
+        CGPathAddLineToPoint(path, nil, 186 - offsetX, 28 - offsetY);
+        CGPathAddLineToPoint(path, nil, 175 - offsetX, 21 - offsetY);
+        CGPathAddLineToPoint(path, nil, 126 - offsetX, 33 - offsetY);
+        CGPathAddLineToPoint(path, nil, 77 - offsetX, 31 - offsetY);
+        CGPathAddLineToPoint(path, nil, 43 - offsetX, 12 - offsetY);
+        CGPathAddLineToPoint(path, nil, 1 - offsetX, 18 - offsetY);
+        
+        sprite.physicsBody = SKPhysicsBody(edgeChainFromPath: path)
+        
+        return sprite
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
