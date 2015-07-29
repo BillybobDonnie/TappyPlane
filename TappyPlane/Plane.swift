@@ -11,6 +11,7 @@ import SpriteKit
 class Plane: SKSpriteNode {
     
     let keyPlaneAnimation = "PlaneAnimation"
+    let maxAltitude: CGFloat = 300
     
     var puffTrailEmitter: SKEmitterNode?
     var puffTrailBirthRate: CGFloat?
@@ -125,7 +126,7 @@ class Plane: SKSpriteNode {
     }
     
     func update() {
-        if accelerating {
+        if accelerating && self.position.y < maxAltitude {
             self.physicsBody?.applyForce(CGVectorMake(0, 100))
         }
         
