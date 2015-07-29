@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     struct PhysicsCategory {
         static let Plane: UInt32    = 0
@@ -33,6 +33,7 @@ class GameScene: SKScene {
         let graphics = SKTextureAtlas(named: "Graphics")
         
         self.physicsWorld.gravity = CGVectorMake(0, -5.5)
+        self.physicsWorld.contactDelegate = self
         
         world = SKNode()
         addChild(world)
@@ -95,6 +96,14 @@ class GameScene: SKScene {
         return sprite
     }
     
+    func didBeginContact(contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == PhysicsCategory.Plane {
+            player.collide(contact.bodyB)
+        } else if contact.bodyB.categoryBitMask == PhysicsCategory.Plane {
+            player.collide(contact.bodyA)
+        }
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch in touches {
             player.physicsBody?.affectedByGravity = true
@@ -118,8 +127,11 @@ class GameScene: SKScene {
         }
         
         player.update()
-        background.update(timeElapsed)
-        foreground.update(timeElapsed)
+        
+        if !player.crashed {
+            background.update(timeElapsed)
+            foreground.update(timeElapsed)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

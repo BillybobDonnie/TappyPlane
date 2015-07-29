@@ -17,6 +17,12 @@ class Plane: SKSpriteNode {
     
     var planeAnimations: [SKAction]!
     var accelerating = false
+    var crashed = false {
+        didSet {
+            self.accelerating = false
+            self.engineRunning = false
+        }
+    }
     var engineRunning = false {
         didSet {
             if engineRunning {
@@ -84,6 +90,15 @@ class Plane: SKSpriteNode {
         }
         
         setRandomColor()
+    }
+    
+    func collide(body: SKPhysicsBody) {
+        if !crashed {
+            if body.categoryBitMask == GameScene.PhysicsCategory.Ground {
+                // Hit the ground
+                crashed = true
+            }
+        }
     }
     
     func setRandomColor() {
