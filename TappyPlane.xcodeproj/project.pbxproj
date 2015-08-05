@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		241832381B7204B5009A4527 /* BitmapFontLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241832371B7204B5009A4527 /* BitmapFontLabel.swift */; };
 		242695881B672B7A00E69AFE /* Graphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 242695871B672B7A00E69AFE /* Graphics.atlas */; };
 		2426958A1B672C5800E69AFE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242695891B672C5800E69AFE /* Plane.swift */; };
 		242A5B671B68B1B300E418F0 /* ObstacleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		241832371B7204B5009A4527 /* BitmapFontLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitmapFontLabel.swift; sourceTree = "<group>"; };
 		242695871B672B7A00E69AFE /* Graphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Graphics.atlas; sourceTree = "<group>"; };
 		242695891B672C5800E69AFE /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleLayer.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				242695871B672B7A00E69AFE /* Graphics.atlas */,
 				24BDE74A1B671DD4003C18BE /* AppDelegate.swift */,
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
+				241832371B7204B5009A4527 /* BitmapFontLabel.swift */,
 				24B645311B67DF8D004E23E1 /* ScrollingNode.swift */,
 				24B645331B67E1AE004E23E1 /* ScrollingLayer.swift */,
 				242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */,
@@ -261,6 +264,7 @@
 				242A5B671B68B1B300E418F0 /* ObstacleLayer.swift in Sources */,
 				24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */,
 				24B2B2891B71BC6200EF9D89 /* Collectable.swift in Sources */,
+				241832381B7204B5009A4527 /* BitmapFontLabel.swift in Sources */,
 				24B645341B67E1AE004E23E1 /* ScrollingLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
