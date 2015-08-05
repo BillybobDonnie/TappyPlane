@@ -100,7 +100,9 @@ class Plane: SKSpriteNode {
                 // Hit the ground
                 crashed = true
             } else if body.categoryBitMask == GameScene.PhysicsCategory.Collectable {
-                body.node?.runAction(SKAction.removeFromParent())
+                if let collectable = body.node as? Collectable {
+                    collectable.collect()
+                }
             }
         }
     }

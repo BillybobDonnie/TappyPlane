@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     struct PhysicsCategory {
         static let Plane: UInt32        = 0
@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // setup obstacles
         obstacles = ObstacleLayer()
+        obstacles.collectableDelegate = self
         obstacles.horizontalScrollingSpeed = -80
         obstacles.marker = self.size.width + obstacles.markerBuffer
         obstacles.scrolling = true
@@ -169,6 +170,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - CollectableDelegate Methods
+    
+    func wasCollected(collectable: Collectable) {
+        println("Collectable of value: \(collectable.pointValue)")
     }
     
 }

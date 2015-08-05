@@ -24,6 +24,8 @@ class ObstacleLayer: ScrollingNode {
         }
     }
     
+    weak var collectableDelegate: CollectableDelegate?
+    
     var marker: CGFloat!
     
     let markerBuffer: CGFloat = 200
@@ -142,7 +144,9 @@ class ObstacleLayer: ScrollingNode {
             object.name = obstacle.getKey()
             addChild(object)
         } else if obstacle == Obstacle.COLLECTABLE_STAR {
-            object = SKSpriteNode(texture: graphics.textureNamed("starGold"))
+            object = Collectable(texture: graphics.textureNamed("starGold"))
+            (object as! Collectable).pointValue = 1
+            (object as! Collectable).delegate = collectableDelegate
             object.physicsBody = SKPhysicsBody(circleOfRadius: object.size.width * 0.3)
             object.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Collectable
             object.physicsBody?.dynamic = false
