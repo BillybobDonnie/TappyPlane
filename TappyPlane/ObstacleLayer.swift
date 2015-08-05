@@ -10,14 +10,16 @@ import SpriteKit
 
 class ObstacleLayer: ScrollingNode {
     
-    enum Mountain {
-        case UP
-        case DOWN
+    enum Obstacle {
+        case MOUNTAIN_UP
+        case MOUNTAIN_DOWN
+        case COLLECTABLE_STAR
         
         func getKey() -> String {
             switch self {
-            case .UP: return "MountainUp"
-            case .DOWN: return "MountainDown"
+            case .MOUNTAIN_UP: return "MountainUp"
+            case .MOUNTAIN_DOWN: return "MountainDown"
+            case .COLLECTABLE_STAR: return "CollectableStar"
             }
         }
     }
@@ -57,8 +59,8 @@ class ObstacleLayer: ScrollingNode {
     }
     
     func addObstacleSet() {
-        let mountainUp = getUnusedObject(.UP)
-        let mountainDown = getUnusedObject(.DOWN)
+        let mountainUp = getUnusedObject(.MOUNTAIN_UP)
+        let mountainDown = getUnusedObject(.MOUNTAIN_DOWN)
         
         let maxVariation = (mountainUp.size.height + mountainDown.size.height + verticalGap) - (ceiling - floor)
         let yAdjustment = CGFloat(arc4random_uniform(UInt32(maxVariation)))
@@ -69,7 +71,7 @@ class ObstacleLayer: ScrollingNode {
         marker = marker + spaceBetweenObstacleSets
     }
     
-    func getUnusedObject(mountainType: Mountain) -> SKSpriteNode {
+    func getUnusedObject(obstacle: Obstacle) -> SKSpriteNode {
         if self.scene != nil {
             // get left edge of screen in local coordinates
             let leftEdgeInLocalCoords = self.scene!.convertPoint(CGPointMake(-self.scene!.size.width * self.scene!.anchorPoint.x, 0), toNode: self).x
@@ -77,7 +79,7 @@ class ObstacleLayer: ScrollingNode {
             // try ton find object of mountainType to the left of the screen
             for node in self.children {
                 if let node = node as? SKSpriteNode {
-                    if node.name == mountainType.getKey() && node.frame.origin.x + node.frame.size.width < leftEdgeInLocalCoords {
+                    if node.name == obstacle.getKey() && node.frame.origin.x + node.frame.size.width < leftEdgeInLocalCoords {
                         return node
                     }
                 }
@@ -85,16 +87,15 @@ class ObstacleLayer: ScrollingNode {
         }
         
         // couldn't find an unused node of mountainType, so create new one
-        return createObject(mountainType)
+        return createObject(obstacle)
     }
     
-    func createObject(mountainType: Mountain) -> SKSpriteNode {
+    func createObject(obstacle: Obstacle) -> SKSpriteNode {
         let graphics = SKTextureAtlas(named: "Graphics")
         
-        let object: SKSpriteNode
+        var object = SKSpriteNode()
         
-        switch mountainType {
-        case .UP:
+        if obstacle == Obstacle.MOUNTAIN_UP {
             object = SKSpriteNode(texture: graphics.textureNamed("MountainGrass"))
             
             let offsetX = object.frame.size.width * object.anchorPoint.x;
@@ -111,7 +112,7 @@ class ObstacleLayer: ScrollingNode {
             object.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Ground
             
             addChild(object)
-        case .DOWN:
+        } else if obstacle == Obstacle.MOUNTAIN_DOWN {
             object = SKSpriteNode(texture: graphics.textureNamed("MountainGrassDown"))
             
             let offsetX = object.frame.size.width * object.anchorPoint.x;
@@ -130,7 +131,7 @@ class ObstacleLayer: ScrollingNode {
             addChild(object)
         }
         
-        object.name = mountainType.getKey()
+        object.name = obstacle.getKey()
         
         return object
     }
