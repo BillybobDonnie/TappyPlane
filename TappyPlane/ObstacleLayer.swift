@@ -29,6 +29,8 @@ class ObstacleLayer: ScrollingNode {
     let markerBuffer: CGFloat = 200
     let verticalGap: CGFloat = 90
     let spaceBetweenObstacleSets: CGFloat = 180
+    let collectableVerticalRange: UInt32 = 200
+    let collectableClearance: CGFloat = 50
     var floor: CGFloat!
     var ceiling: CGFloat!
     
@@ -67,6 +69,14 @@ class ObstacleLayer: ScrollingNode {
         
         mountainUp.position = CGPointMake(marker, floor + mountainUp.size.height/2 - yAdjustment)
         mountainDown.position = CGPointMake(marker, mountainUp.position.y + mountainDown.size.height + verticalGap)
+        
+        // collectable star
+        let collectable = getUnusedObject(.COLLECTABLE_STAR)
+        let midPoint = mountainUp.position.y + mountainUp.size.height * 0.5 + verticalGap * 0.5
+        var yPosition = midPoint + CGFloat(arc4random_uniform(collectableVerticalRange)) - CGFloat(collectableVerticalRange) * 0.5
+        yPosition = fmax(yPosition, self.floor + collectableClearance)
+        yPosition = fmin(yPosition, self.ceiling - collectableClearance)
+        collectable.position = CGPointMake(self.marker + spaceBetweenObstacleSets * 0.5, yPosition)
         
         marker = marker + spaceBetweenObstacleSets
     }
@@ -111,6 +121,7 @@ class ObstacleLayer: ScrollingNode {
             object.physicsBody = SKPhysicsBody(edgeLoopFromPath: path)
             object.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Ground
             
+            object.name = obstacle.getKey()
             addChild(object)
         } else if obstacle == Obstacle.MOUNTAIN_DOWN {
             object = SKSpriteNode(texture: graphics.textureNamed("MountainGrassDown"))
@@ -128,11 +139,17 @@ class ObstacleLayer: ScrollingNode {
             object.physicsBody = SKPhysicsBody(edgeLoopFromPath: path)
             object.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Ground
             
+            object.name = obstacle.getKey()
+            addChild(object)
+        } else if obstacle == Obstacle.COLLECTABLE_STAR {
+            object = SKSpriteNode(texture: graphics.textureNamed("starGold"))
+            object.physicsBody = SKPhysicsBody(circleOfRadius: object.size.width * 0.3)
+            object.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Collectable
+            object.physicsBody?.dynamic = false
+            object.name = obstacle.getKey()
             addChild(object)
         }
-        
-        object.name = obstacle.getKey()
-        
+
         return object
     }
 }

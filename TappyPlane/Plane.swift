@@ -63,7 +63,8 @@ class Plane: SKSpriteNode {
         
         self.physicsBody = SKPhysicsBody(polygonFromPath: path)
         self.physicsBody?.categoryBitMask = GameScene.PhysicsCategory.Plane
-        self.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Ground
+        self.physicsBody?.contactTestBitMask = GameScene.PhysicsCategory.Ground | GameScene.PhysicsCategory.Collectable
+        self.physicsBody?.collisionBitMask = GameScene.PhysicsCategory.Ground
         
         self.physicsBody?.mass = 0.08
         
@@ -98,6 +99,8 @@ class Plane: SKSpriteNode {
             if body.categoryBitMask == GameScene.PhysicsCategory.Ground {
                 // Hit the ground
                 crashed = true
+            } else if body.categoryBitMask == GameScene.PhysicsCategory.Collectable {
+                body.node?.runAction(SKAction.removeFromParent())
             }
         }
     }

@@ -11,8 +11,9 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     struct PhysicsCategory {
-        static let Plane: UInt32    = 0
-        static let Ground: UInt32   = 0b1
+        static let Plane: UInt32        = 0
+        static let Ground: UInt32       = 0b1
+        static let Collectable: UInt32  = 0b10
     }
     
     var world: SKNode!
