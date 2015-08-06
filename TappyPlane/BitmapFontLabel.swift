@@ -66,7 +66,7 @@ class BitmapFontLabel: SKNode {
             
             letter.position = pos
             
-            pos.x += letter.position.x + self.letterSpacing
+            pos.x += letter.size.width + self.letterSpacing
             totalSize.width += letter.size.width + self.letterSpacing
             if totalSize.height < letter.size.height {
                 totalSize.height = letter.size.height

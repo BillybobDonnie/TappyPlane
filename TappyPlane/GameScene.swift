@@ -27,6 +27,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     var lastCallTime: NSTimeInterval = 0
     
+    var score: Int = 0 {
+        didSet {
+            scoreLabel.text = "\(score)"
+        }
+    }
+    
+    var scoreLabel: BitmapFontLabel!
+    
     override init(size: CGSize) {
         super.init(size: size)
         
@@ -75,6 +83,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
         world.addChild(player)
+        
+        // setup score label
+        scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
+        scoreLabel.position = CGPointMake(self.size.width/2, self.size.height - 100)
+        addChild(scoreLabel)
         
         newGame()
     }
@@ -130,6 +143,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         player.position = CGPointMake(self.size.width/2, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
         player.reset()
+        
+        score = 0
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -175,7 +190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     // MARK: - CollectableDelegate Methods
     
     func wasCollected(collectable: Collectable) {
-        println("Collectable of value: \(collectable.pointValue)")
+        score += collectable.pointValue
     }
     
 }
