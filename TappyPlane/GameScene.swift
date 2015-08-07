@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         
         // setup score label
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
-        scoreLabel.position = CGPointMake(self.size.width/2, self.size.height - 100)
+        scoreLabel.position = CGPointMake(self.size.width * 0.1, self.size.height - 50)
         addChild(scoreLabel)
         
         newGame()
@@ -94,7 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     func generateGroundTile() -> SKSpriteNode {
         let graphics = SKTextureAtlas(named: "Graphics")
-        let sprite = SKSpriteNode(texture: graphics.textureNamed("groundGrass"))
+        let sprite = SKSpriteNode(texture: TilesetTextureProvider.getProvider().getTextureForKey("ground"))
         sprite.anchorPoint = CGPointZero
         
         let offsetX = sprite.frame.size.width * sprite.anchorPoint.x;
@@ -130,6 +130,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     }
     
     func newGame() {
+        TilesetTextureProvider.getProvider().randomizeTileset()
+        
         // reset layers
         background.position = CGPointZero
         background.layoutTiles()
@@ -137,6 +139,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         obstacles.reset()
         obstacles.scrolling = false
         foreground.position = CGPointZero
+        
+        for node in foreground.children {
+            if let ground = node as? SKSpriteNode {
+                ground.texture = TilesetTextureProvider.getProvider().getTextureForKey("ground")
+            }
+        }
+        
         foreground.layoutTiles()
         
         // reset plane

@@ -41,6 +41,14 @@ class ObstacleLayer: ScrollingNode {
         for node in self.children {
             if let node = node as? SKNode {
                 node.position = CGPointMake(-1000, 0)
+                
+                if node.name == Obstacle.MOUNTAIN_DOWN.getKey() {
+                    (node as! SKSpriteNode).texture = TilesetTextureProvider.getProvider().getTextureForKey("mountainDown")
+                }
+                
+                if node.name == Obstacle.MOUNTAIN_UP.getKey() {
+                    (node as! SKSpriteNode).texture = TilesetTextureProvider.getProvider().getTextureForKey("mountainUp")
+                }
             }
         }
         
@@ -108,7 +116,7 @@ class ObstacleLayer: ScrollingNode {
         var object = SKSpriteNode()
         
         if obstacle == Obstacle.MOUNTAIN_UP {
-            object = SKSpriteNode(texture: graphics.textureNamed("MountainGrass"))
+            object = SKSpriteNode(texture: TilesetTextureProvider.getProvider().getTextureForKey("mountainUp"))
             
             let offsetX = object.frame.size.width * object.anchorPoint.x;
             let offsetY = object.frame.size.height * object.anchorPoint.y;
@@ -126,7 +134,7 @@ class ObstacleLayer: ScrollingNode {
             object.name = obstacle.getKey()
             addChild(object)
         } else if obstacle == Obstacle.MOUNTAIN_DOWN {
-            object = SKSpriteNode(texture: graphics.textureNamed("MountainGrassDown"))
+            object = SKSpriteNode(texture: TilesetTextureProvider.getProvider().getTextureForKey("mountainDown"))
             
             let offsetX = object.frame.size.width * object.anchorPoint.x;
             let offsetY = object.frame.size.height * object.anchorPoint.y;
