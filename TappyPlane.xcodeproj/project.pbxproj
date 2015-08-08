@@ -24,6 +24,7 @@
 		24BDE7561B671DD4003C18BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE7551B671DD4003C18BE /* Images.xcassets */; };
 		24BDE7591B671DD4003C18BE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24BDE7571B671DD4003C18BE /* LaunchScreen.xib */; };
 		24BDE7651B671DD4003C18BE /* TappyPlaneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BDE7641B671DD4003C18BE /* TappyPlaneTests.swift */; };
+		24BF28131B75BE1700DF2E33 /* ObstacleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BF28121B75BE1700DF2E33 /* ObstacleProvider.swift */; };
 		24C7334F1B6748C700EE2F43 /* PlaneAnimations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24C7334E1B6748C700EE2F43 /* PlaneAnimations.plist */; };
 		24D7A1501B730DC40023DD5D /* TilesetTextureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D7A14F1B730DC40023DD5D /* TilesetTextureProvider.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		24BDE75E1B671DD4003C18BE /* TappyPlaneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TappyPlaneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24BDE7631B671DD4003C18BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24BDE7641B671DD4003C18BE /* TappyPlaneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappyPlaneTests.swift; sourceTree = "<group>"; };
+		24BF28121B75BE1700DF2E33 /* ObstacleProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleProvider.swift; sourceTree = "<group>"; };
 		24C7334E1B6748C700EE2F43 /* PlaneAnimations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlaneAnimations.plist; sourceTree = "<group>"; };
 		24D7A14F1B730DC40023DD5D /* TilesetTextureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TilesetTextureProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 				24BDE74E1B671DD4003C18BE /* GameScene.swift */,
 				241832371B7204B5009A4527 /* BitmapFontLabel.swift */,
 				24D7A14F1B730DC40023DD5D /* TilesetTextureProvider.swift */,
+				24BF28121B75BE1700DF2E33 /* ObstacleProvider.swift */,
 				24B645311B67DF8D004E23E1 /* ScrollingNode.swift */,
 				24B645331B67E1AE004E23E1 /* ScrollingLayer.swift */,
 				242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */,
@@ -282,6 +285,7 @@
 				24B2B2891B71BC6200EF9D89 /* Collectable.swift in Sources */,
 				241832381B7204B5009A4527 /* BitmapFontLabel.swift in Sources */,
 				24B645341B67E1AE004E23E1 /* ScrollingLayer.swift in Sources */,
+				24BF28131B75BE1700DF2E33 /* ObstacleProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

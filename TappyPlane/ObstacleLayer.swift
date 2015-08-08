@@ -71,24 +71,20 @@ class ObstacleLayer: ScrollingNode {
     }
     
     func addObstacleSet() {
-        let mountainUp = getUnusedObject(.MOUNTAIN_UP)
-        let mountainDown = getUnusedObject(.MOUNTAIN_DOWN)
+        let obstacleSet = ObstacleProvider.getProvider().getRandomObstacleSet()
         
-        let maxVariation = (mountainUp.size.height + mountainDown.size.height + verticalGap) - (ceiling - floor)
-        let yAdjustment = CGFloat(arc4random_uniform(UInt32(maxVariation)))
+        var furthestItemPos: CGFloat = 0
         
-        mountainUp.position = CGPointMake(marker, floor + mountainUp.size.height/2 - yAdjustment)
-        mountainDown.position = CGPointMake(marker, mountainUp.position.y + mountainDown.size.height + verticalGap)
+        for obstacle in obstacleSet {
+            let object = getUnusedObject(obstacle.key)
+            object.position = CGPointMake(obstacle.position.x + marker, obstacle.position.y)
+            
+            if obstacle.position.x > furthestItemPos {
+                furthestItemPos = obstacle.position.x
+            }
+        }
         
-        // collectable star
-        let collectable = getUnusedObject(.COLLECTABLE_STAR)
-        let midPoint = mountainUp.position.y + mountainUp.size.height * 0.5 + verticalGap * 0.5
-        var yPosition = midPoint + CGFloat(arc4random_uniform(collectableVerticalRange)) - CGFloat(collectableVerticalRange) * 0.5
-        yPosition = fmax(yPosition, self.floor + collectableClearance)
-        yPosition = fmin(yPosition, self.ceiling - collectableClearance)
-        collectable.position = CGPointMake(self.marker + spaceBetweenObstacleSets * 0.5, yPosition)
-        
-        marker = marker + spaceBetweenObstacleSets
+        marker = marker + spaceBetweenObstacleSets + furthestItemPos
     }
     
     func getUnusedObject(obstacle: Obstacle) -> SKSpriteNode {
