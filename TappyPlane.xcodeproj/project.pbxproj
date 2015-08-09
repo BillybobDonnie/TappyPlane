@@ -11,6 +11,7 @@
 		242695881B672B7A00E69AFE /* Graphics.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 242695871B672B7A00E69AFE /* Graphics.atlas */; };
 		2426958A1B672C5800E69AFE /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242695891B672C5800E69AFE /* Plane.swift */; };
 		242A5B671B68B1B300E418F0 /* ObstacleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */; };
+		24A1976C1B76145D001E2817 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A1976B1B76145D001E2817 /* Button.swift */; };
 		24B154841B67837D00AFFF39 /* PlanePuffTrail.sks in Resources */ = {isa = PBXBuildFile; fileRef = 24B154821B67837D00AFFF39 /* PlanePuffTrail.sks */; };
 		24B154851B67837D00AFFF39 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B154831B67837D00AFFF39 /* spark.png */; };
 		24B2AE8D1B73065B008F8280 /* TilesetGraphics.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24B2AE8C1B73065B008F8280 /* TilesetGraphics.plist */; };
@@ -44,6 +45,7 @@
 		242695871B672B7A00E69AFE /* Graphics.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Graphics.atlas; sourceTree = "<group>"; };
 		242695891B672C5800E69AFE /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleLayer.swift; sourceTree = "<group>"; };
+		24A1976B1B76145D001E2817 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		24B154821B67837D00AFFF39 /* PlanePuffTrail.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanePuffTrail.sks; sourceTree = "<group>"; };
 		24B154831B67837D00AFFF39 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		24B2AE8C1B73065B008F8280 /* TilesetGraphics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TilesetGraphics.plist; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				241832371B7204B5009A4527 /* BitmapFontLabel.swift */,
 				24D7A14F1B730DC40023DD5D /* TilesetTextureProvider.swift */,
 				24BF28121B75BE1700DF2E33 /* ObstacleProvider.swift */,
+				24A1976B1B76145D001E2817 /* Button.swift */,
 				24B645311B67DF8D004E23E1 /* ScrollingNode.swift */,
 				24B645331B67E1AE004E23E1 /* ScrollingLayer.swift */,
 				242A5B661B68B1B300E418F0 /* ObstacleLayer.swift */,
@@ -282,6 +285,7 @@
 				2426958A1B672C5800E69AFE /* Plane.swift in Sources */,
 				242A5B671B68B1B300E418F0 /* ObstacleLayer.swift in Sources */,
 				24BDE74B1B671DD4003C18BE /* AppDelegate.swift in Sources */,
+				24A1976C1B76145D001E2817 /* Button.swift in Sources */,
 				24B2B2891B71BC6200EF9D89 /* Collectable.swift in Sources */,
 				241832381B7204B5009A4527 /* BitmapFontLabel.swift in Sources */,
 				24B645341B67E1AE004E23E1 /* ScrollingLayer.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonDelegate {
     
     struct PhysicsCategory {
         static let Plane: UInt32        = 0
@@ -80,7 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         world.addChild(foreground)
         
         player = Plane()
-        player.position = CGPointMake(self.size.width/2, self.size.height/2)
+        player.position = CGPointMake(self.size.width * 0.3, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
         world.addChild(player)
         
@@ -149,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         foreground.layoutTiles()
         
         // reset plane
-        player.position = CGPointMake(self.size.width/2, self.size.height/2)
+        player.position = CGPointMake(self.size.width * 0.3, self.size.height/2)
         player.physicsBody?.affectedByGravity = false
         player.reset()
         
@@ -200,6 +200,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     func wasCollected(collectable: Collectable) {
         score += collectable.pointValue
+    }
+    
+    // MARK: - ButtonDelegate Methods
+    
+    func buttonPressed(button: Button) {
+        
     }
     
 }
