@@ -8,12 +8,18 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOverMenuDelegate {
     
     struct PhysicsCategory {
         static let Plane: UInt32        = 0
         static let Ground: UInt32       = 0b1
         static let Collectable: UInt32  = 0b10
+    }
+    
+    enum GameState {
+        case Ready
+        case Running
+        case Over
     }
     
     var world: SKNode!
@@ -35,6 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     var scoreLabel: BitmapFontLabel!
     var gameOverMenu: GameOverMenu!
+    var gameState: GameState!
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -87,13 +94,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         
         // setup score label
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
-        scoreLabel.position = CGPointMake(self.size.width * 0.1, self.size.height - 50)
+        scoreLabel.position = CGPointMake(self.size.width * 0.9, self.size.height - 50)
         addChild(scoreLabel)
         
         // test game over menu
         gameOverMenu = GameOverMenu(size: self.size)
-        gameOverMenu.score = 93
-        gameOverMenu.bestScore = 246
+        gameOverMenu.delegate = self
+        gameOverMenu.alpha = 0.01   // possible spritekit bug, doesn't work with alpha 0.0
         addChild(gameOverMenu)
         
         newGame()
@@ -161,22 +168,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         player.reset()
         
         score = 0
+        scoreLabel.alpha = 1.0
+        
+        gameState = .Ready
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        for touch in touches {
-            if player.crashed {
-                newGame()
-            } else {
-                player.physicsBody?.affectedByGravity = true
-                player.accelerating = true
-                obstacles.scrolling = true
-            }
+        if gameState == .Ready {
+            player.physicsBody?.affectedByGravity = true
+            obstacles.scrolling = true
+            gameState = .Running
+        }
+        
+        if gameState == .Running {
+            player.accelerating = true
         }
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        for touch in touches {
+        if gameState == .Running {
             player.accelerating = false
         }
     }
@@ -192,7 +202,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
         
         player.update()
         
-        if !player.crashed {
+        if gameState == .Running && player.crashed {
+            gameState = .Over
+            scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
+            gameOverMenu.alpha = 1.0
+            gameOverMenu.show()
+        }
+        
+        if gameState != .Over {
             background.update(timeElapsed)
             obstacles.update(timeElapsed)
             foreground.update(timeElapsed)
@@ -207,6 +224,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     func wasCollected(collectable: Collectable) {
         score += collectable.pointValue
+    }
+    
+    // MARK: - GameOverMenuDelegate Methods
+    
+    func pressedStartNewGameButton() {
+        newGame()
+        gameOverMenu.alpha = 0.0
+        gameOverMenu.playButton.userInteractionEnabled = false
     }
     
 }

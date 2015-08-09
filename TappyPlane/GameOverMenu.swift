@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+protocol GameOverMenuDelegate: class {
+    func pressedStartNewGameButton()
+}
+
 class GameOverMenu: SKNode, ButtonDelegate {
     
     enum Medal {
@@ -50,6 +54,8 @@ class GameOverMenu: SKNode, ButtonDelegate {
     var gameOverText: SKSpriteNode!
     var panelGroup: SKNode!
     var playButton: Button!
+    
+    weak var delegate: GameOverMenuDelegate?
     
     init(size: CGSize) {
         super.init()
@@ -119,6 +125,7 @@ class GameOverMenu: SKNode, ButtonDelegate {
         
         // setup play button
         playButton = Button(texture: atlas.textureNamed("buttonPlay"))
+        playButton.userInteractionEnabled = false
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.position = CGPointMake(CGRectGetMidX(panelBackground.frame), CGRectGetMinY(panelBackground.frame) - 25)
@@ -165,7 +172,7 @@ class GameOverMenu: SKNode, ButtonDelegate {
     // MARK: - ButtonDelegate Methods
     
     func buttonPressed(button: Button) {
-        show()
+        delegate?.pressedStartNewGameButton()
     }
    
 }
