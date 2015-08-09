@@ -92,6 +92,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonD
         
         // test game over menu
         gameOverMenu = GameOverMenu(size: self.size)
+        gameOverMenu.score = 93
+        gameOverMenu.bestScore = 246
         addChild(gameOverMenu)
         
         newGame()

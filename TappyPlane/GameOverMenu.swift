@@ -17,8 +17,16 @@ class GameOverMenu: SKNode {
         case Gold
     }
     
-    var score: Int!
-    var bestScore: Int!
+    var score: Int! {
+        didSet {
+            scoreText.text = "\(score)"
+        }
+    }
+    var bestScore: Int! {
+        didSet {
+            bestScoreText.text = "\(bestScore)"
+        }
+    }
     var medal: Medal = .None {
         didSet {
             switch medal {
@@ -35,6 +43,9 @@ class GameOverMenu: SKNode {
     }
     var size: CGSize!
     var medalDisplay: SKSpriteNode!
+    
+    var scoreText: BitmapFontLabel!
+    var bestScoreText: BitmapFontLabel!
     
     init(size: CGSize) {
         super.init()
@@ -64,11 +75,26 @@ class GameOverMenu: SKNode {
         scoreTitle.position = CGPointMake(CGRectGetMaxX(panelBackground.frame) - 20, CGRectGetMaxY(panelBackground.frame) - 10)
         panelGroup.addChild(scoreTitle)
         
+        // setup score text label
+        scoreText = BitmapFontLabel(text: "0", fontName: "number")
+        scoreText.alignment = .Right
+        scoreText.position = CGPointMake(CGRectGetMaxX(scoreTitle.frame), CGRectGetMinY(scoreTitle.frame) - 15)
+        scoreText.setScale(0.5)
+        panelGroup.addChild(scoreText)
+        
         // setup best title
         let bestTitle = SKSpriteNode(texture: atlas.textureNamed("textBest"))
         bestTitle.anchorPoint = CGPointMake(1.0, 1.0)
         bestTitle.position = CGPointMake(CGRectGetMaxX(panelBackground.frame) - 20, CGRectGetMaxY(panelBackground.frame) - 60)
         panelGroup.addChild(bestTitle)
+        
+        // setup best score text label
+        // setup score text label
+        bestScoreText = BitmapFontLabel(text: "0", fontName: "number")
+        bestScoreText.alignment = .Right
+        bestScoreText.position = CGPointMake(CGRectGetMaxX(bestTitle.frame), CGRectGetMinY(bestTitle.frame) - 15)
+        bestScoreText.setScale(0.5)
+        panelGroup.addChild(bestScoreText)
         
         // setup medal title
         let medalTitle = SKSpriteNode(texture: atlas.textureNamed("textMedal"))
