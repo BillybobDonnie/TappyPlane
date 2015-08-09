@@ -10,6 +10,18 @@ import SpriteKit
 
 class BitmapFontLabel: SKNode {
     
+    enum Alignment {
+        case Left
+        case Right
+        case Center
+    }
+    
+    var alignment: Alignment = .Center {
+        didSet {
+            updateText()
+        }
+    }
+    
     var fontName: String! {
         didSet {
             updateText()
@@ -77,8 +89,18 @@ class BitmapFontLabel: SKNode {
             totalSize.width -= self.letterSpacing
         }
         
-        // center text
-        let adjustment = CGPointMake(-totalSize.width/2, -totalSize.height/2)
+        var adjustment: CGPoint
+        
+        // text alignment
+        switch alignment {
+        case .Left:
+            adjustment = CGPointMake(0, -totalSize.height/2)
+        case .Right:
+            adjustment = CGPointMake(-totalSize.width, -totalSize.height/2)
+        case .Center:
+            adjustment = CGPointMake(-totalSize.width/2, -totalSize.height/2)
+        }
+
         for var index = 0; index < self.children.count; index++ {
             var letter = self.children[index] as! SKSpriteNode
             letter.position = CGPointMake(letter.position.x + adjustment.x, letter.position.y + adjustment.y)
