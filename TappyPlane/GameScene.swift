@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonDelegate {
+class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate {
     
     struct PhysicsCategory {
         static let Plane: UInt32        = 0
@@ -133,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonD
             player.collide(contact.bodyB)
         } else if contact.bodyB.categoryBitMask == PhysicsCategory.Plane {
             player.collide(contact.bodyA)
-        }
+        }        
     }
     
     func newGame() {
@@ -207,12 +207,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonD
     
     func wasCollected(collectable: Collectable) {
         score += collectable.pointValue
-    }
-    
-    // MARK: - ButtonDelegate Methods
-    
-    func buttonPressed(button: Button) {
-        
     }
     
 }

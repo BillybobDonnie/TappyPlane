@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameOverMenu: SKNode {
+class GameOverMenu: SKNode, ButtonDelegate {
     
     enum Medal {
         case None
@@ -56,6 +56,11 @@ class GameOverMenu: SKNode {
         // container for panel elements
         let panelGroup = SKNode()
         self.addChild(panelGroup)
+        
+        // setup game over title
+        let gameOverText = SKSpriteNode(texture: atlas.textureNamed("textGameOver"))
+        gameOverText.position = CGPointMake(self.size.width/2, self.size.height - 70)
+        self.addChild(gameOverText)
         
         // setup panel background
         let panelBackground = SKSpriteNode(texture: atlas.textureNamed("UIbg"))
@@ -106,11 +111,24 @@ class GameOverMenu: SKNode {
         medalDisplay = SKSpriteNode(texture: atlas.textureNamed("medalBlank"))
         medalDisplay.anchorPoint = CGPointMake(0.5, 1.0)
         medalDisplay.position = CGPointMake(CGRectGetMidX(medalTitle.frame), CGRectGetMinY(medalTitle.frame) - 15)
-        panelGroup.addChild(medalDisplay)        
+        panelGroup.addChild(medalDisplay)
+        
+        // play button
+        let playButton = Button(texture: atlas.textureNamed("buttonPlay"))
+        playButton.name = "playButton"
+        playButton.delegate = self
+        playButton.position = CGPointMake(CGRectGetMidX(panelBackground.frame), CGRectGetMinY(panelBackground.frame) - 25)
+        self.addChild(playButton)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - ButtonDelegate Methods
+    
+    func buttonPressed(button: Button) {
+        println("button pressed...")
     }
    
 }
