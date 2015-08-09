@@ -34,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonD
     }
     
     var scoreLabel: BitmapFontLabel!
+    var gameOverMenu: GameOverMenu!
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -88,6 +89,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, ButtonD
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
         scoreLabel.position = CGPointMake(self.size.width * 0.1, self.size.height - 50)
         addChild(scoreLabel)
+        
+        // test game over menu
+        gameOverMenu = GameOverMenu(size: self.size)
+        addChild(gameOverMenu)
         
         newGame()
     }
