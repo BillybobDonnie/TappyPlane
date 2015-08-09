@@ -39,6 +39,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         }
     }
     
+    var bestScore: Int!
+    
     var scoreLabel: BitmapFontLabel!
     var gameOverMenu: GameOverMenu!
     var gameState: GameState!
@@ -102,6 +104,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameOverMenu.delegate = self
         gameOverMenu.alpha = 0.01   // possible spritekit bug, doesn't work with alpha 0.0
         addChild(gameOverMenu)
+        
+        bestScore = 0
         
         newGame()
     }
@@ -206,6 +210,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
             gameState = .Over
             scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
             gameOverMenu.alpha = 1.0
+            gameOverMenu.score = score
+            gameOverMenu.medal = getMedalForCurrentScore(score)
+            if score > bestScore {
+                bestScore = score
+            }
+            gameOverMenu.bestScore = bestScore
             gameOverMenu.show()
         }
         
@@ -213,6 +223,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
             background.update(timeElapsed)
             obstacles.update(timeElapsed)
             foreground.update(timeElapsed)
+        }
+    }
+    
+    func getMedalForCurrentScore(score: Int) -> GameOverMenu.Medal {
+        let adjustedScore = score - bestScore/5
+        
+        if adjustedScore >= 45 {
+            return .Gold
+        } else if adjustedScore >= 25 {
+            return .Silver
+        } else if adjustedScore >= 10 {
+            return .Bronze
+        } else {
+            return .None
         }
     }
 
