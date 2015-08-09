@@ -47,6 +47,10 @@ class GameOverMenu: SKNode, ButtonDelegate {
     var scoreText: BitmapFontLabel!
     var bestScoreText: BitmapFontLabel!
     
+    var gameOverText: SKSpriteNode!
+    var panelGroup: SKNode!
+    var playButton: Button!
+    
     init(size: CGSize) {
         super.init()
         self.size = size
@@ -54,11 +58,11 @@ class GameOverMenu: SKNode, ButtonDelegate {
         let atlas = SKTextureAtlas(named: "Graphics")
         
         // container for panel elements
-        let panelGroup = SKNode()
+        panelGroup = SKNode()
         self.addChild(panelGroup)
         
         // setup game over title
-        let gameOverText = SKSpriteNode(texture: atlas.textureNamed("textGameOver"))
+        gameOverText = SKSpriteNode(texture: atlas.textureNamed("textGameOver"))
         gameOverText.position = CGPointMake(self.size.width/2, self.size.height - 70)
         self.addChild(gameOverText)
         
@@ -113,12 +117,45 @@ class GameOverMenu: SKNode, ButtonDelegate {
         medalDisplay.position = CGPointMake(CGRectGetMidX(medalTitle.frame), CGRectGetMinY(medalTitle.frame) - 15)
         panelGroup.addChild(medalDisplay)
         
-        // play button
-        let playButton = Button(texture: atlas.textureNamed("buttonPlay"))
+        // setup play button
+        playButton = Button(texture: atlas.textureNamed("buttonPlay"))
         playButton.name = "playButton"
         playButton.delegate = self
         playButton.position = CGPointMake(CGRectGetMidX(panelBackground.frame), CGRectGetMinY(panelBackground.frame) - 25)
         self.addChild(playButton)
+    }
+    
+    func show() {
+        // animate game over text
+        let dropGameOverText = SKAction.moveByX(0, y: -100, duration: 0.5)
+        dropGameOverText.timingMode = .EaseOut
+        gameOverText.position = CGPointMake(gameOverText.position.x, gameOverText.position.y + 100)
+        gameOverText.runAction(dropGameOverText)
+        
+        // animate mani menu panel
+        let raisePanel = SKAction.group([
+            SKAction.fadeInWithDuration(0.4),
+            SKAction.moveByX(0, y: 100, duration: 0.4)
+        ])
+        raisePanel.timingMode = .EaseOut
+        panelGroup.alpha = 0
+        panelGroup.position = CGPointMake(panelGroup.position.x, panelGroup.position.y - 100)
+        panelGroup.runAction(SKAction.sequence([
+            SKAction.waitForDuration(0.7),
+            raisePanel
+        ]))
+        
+        // animate play button
+        let fadeInPlayButton = SKAction.sequence([
+            SKAction.waitForDuration(1.2),
+            SKAction.fadeInWithDuration(0.4)
+        ])
+        fadeInPlayButton.timingMode = .EaseOut
+        playButton.alpha = 0
+        playButton.userInteractionEnabled = false
+        playButton.runAction(fadeInPlayButton) {
+            self.playButton.userInteractionEnabled = true
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -128,7 +165,7 @@ class GameOverMenu: SKNode, ButtonDelegate {
     // MARK: - ButtonDelegate Methods
     
     func buttonPressed(button: Button) {
-        println("button pressed...")
+        show()
     }
    
 }
