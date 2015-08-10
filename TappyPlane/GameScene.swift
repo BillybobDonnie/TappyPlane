@@ -49,7 +49,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     }
     
     var scoreLabel: BitmapFontLabel!
+    
     var gameOverMenu: GameOverMenu!
+    var getReadyMenu: GetReadyMenu!
+    
     var gameState: GameState!
     
     override init(size: CGSize) {
@@ -103,14 +106,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         
         // setup score label
         scoreLabel = BitmapFontLabel(text: "0", fontName: "number")
-        scoreLabel.position = CGPointMake(self.size.width * 0.9, self.size.height - 50)
+        scoreLabel.position = CGPointMake(self.size.width * 0.5, self.size.height - 50)
         addChild(scoreLabel)
         
-        // test game over menu
+        // setup game over menu
         gameOverMenu = GameOverMenu(size: self.size)
         gameOverMenu.delegate = self
         gameOverMenu.alpha = 0.01   // possible spritekit bug, doesn't work with alpha 0.0
         addChild(gameOverMenu)
+        
+        // setup get ready menu
+        getReadyMenu = GetReadyMenu(size: self.size, planePosition: player.position)
+        addChild(getReadyMenu)
         
         bestScore = NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey)
         
@@ -179,7 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         player.reset()
         
         score = 0
-        scoreLabel.alpha = 1.0
+        scoreLabel.alpha = 0.0
         
         gameState = .Ready
     }
@@ -208,6 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         if gameState == .Ready {
+            getReadyMenu.hide()
             player.physicsBody?.affectedByGravity = true
             obstacles.scrolling = true
             gameState = .Running
@@ -215,6 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         
         if gameState == .Running {
             player.accelerating = true
+            scoreLabel.alpha = 1.0
         }
     }
     
@@ -284,6 +293,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
             self.newGame()
             self.gameOverMenu.alpha = 0.0
             self.gameOverMenu.playButton.userInteractionEnabled = false
+            self.getReadyMenu.show()
         }
         
         let fadeTransition = SKAction.sequence([
