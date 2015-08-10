@@ -264,9 +264,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
     // MARK: - GameOverMenuDelegate Methods
     
     func pressedStartNewGameButton() {
-        newGame()
-        gameOverMenu.alpha = 0.0
-        gameOverMenu.playButton.userInteractionEnabled = false
+        let blackRect = SKSpriteNode(color: SKColor.blackColor(), size: self.size)
+        blackRect.anchorPoint = CGPointZero
+        blackRect.zPosition = 10
+        blackRect.alpha = 0.0
+        addChild(blackRect)
+        
+        let startNewGame = SKAction.runBlock {
+            self.newGame()
+            self.gameOverMenu.alpha = 0.0
+            self.gameOverMenu.playButton.userInteractionEnabled = false
+        }
+        
+        let fadeTransition = SKAction.sequence([
+            SKAction.fadeInWithDuration(0.4),
+            startNewGame,
+            SKAction.fadeOutWithDuration(0.6),
+            SKAction.removeFromParent()
+        ])
+        
+        blackRect.runAction(fadeTransition)
     }
     
 }
