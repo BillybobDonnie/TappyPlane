@@ -16,6 +16,8 @@ class Plane: SKSpriteNode {
     var puffTrailEmitter: SKEmitterNode?
     var puffTrailBirthRate: CGFloat?
     
+    var crashTintAction: SKAction!
+    
     var planeAnimations: [SKAction]!
     var accelerating = false
     var crashed = false {
@@ -91,6 +93,11 @@ class Plane: SKSpriteNode {
             }
         }
         
+        // setup action to tint plane when it crashes
+        let tint = SKAction.colorizeWithColor(SKColor.redColor(), colorBlendFactor: 0.8, duration: 0.0)
+        let removeTint = SKAction.colorizeWithColorBlendFactor(0.0, duration: 0.2)
+        crashTintAction = SKAction.sequence([tint, removeTint])
+        
         setRandomColor()
     }
     
@@ -99,6 +106,7 @@ class Plane: SKSpriteNode {
             if body.categoryBitMask == GameScene.PhysicsCategory.Ground {
                 // Hit the ground
                 crashed = true
+                self.runAction(crashTintAction)
             } else if body.categoryBitMask == GameScene.PhysicsCategory.Collectable {
                 if let collectable = body.node as? Collectable {
                     collectable.collect()
