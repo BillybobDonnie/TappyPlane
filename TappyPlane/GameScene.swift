@@ -22,10 +22,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         case Over
     }
     
+    let bestScoreKey = "bestScore"
+    let minFPS: NSTimeInterval = 10/60
+    
     var world: SKNode!
     var player: Plane!
-    
-    let minFPS: NSTimeInterval = 10/60
     
     var background: ScrollingLayer!
     var foreground: ScrollingLayer!
@@ -39,7 +40,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         }
     }
     
-    var bestScore: Int!
+    var bestScore: Int! {
+        didSet {
+            let userDefaults = NSUserDefaults.standardUserDefaults()
+            userDefaults.setInteger(bestScore, forKey: bestScoreKey)
+            userDefaults.synchronize()
+        }
+    }
     
     var scoreLabel: BitmapFontLabel!
     var gameOverMenu: GameOverMenu!
@@ -105,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameOverMenu.alpha = 0.01   // possible spritekit bug, doesn't work with alpha 0.0
         addChild(gameOverMenu)
         
-        bestScore = 0
+        bestScore = NSUserDefaults.standardUserDefaults().integerForKey(bestScoreKey)
         
         newGame()
     }
@@ -177,6 +184,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameState = .Ready
     }
     
+    func gameOver() {
+        gameState = .Over
+        scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
+        gameOverMenu.alpha = 1.0
+        gameOverMenu.score = score
+        gameOverMenu.medal = getMedalForCurrentScore(score)
+        if score > bestScore {
+            bestScore = score
+        }
+        gameOverMenu.bestScore = bestScore
+        gameOverMenu.show()
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         if gameState == .Ready {
             player.physicsBody?.affectedByGravity = true
@@ -207,16 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         player.update()
         
         if gameState == .Running && player.crashed {
-            gameState = .Over
-            scoreLabel.runAction(SKAction.fadeOutWithDuration(0.4))
-            gameOverMenu.alpha = 1.0
-            gameOverMenu.score = score
-            gameOverMenu.medal = getMedalForCurrentScore(score)
-            if score > bestScore {
-                bestScore = score
-            }
-            gameOverMenu.bestScore = bestScore
-            gameOverMenu.show()
+            gameOver()
         }
         
         if gameState != .Over {
