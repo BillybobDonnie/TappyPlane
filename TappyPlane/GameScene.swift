@@ -197,6 +197,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         gameOverMenu.show()
     }
     
+    func bump() {
+        let bump = SKAction.sequence([
+            SKAction.moveBy(CGVectorMake(-5, -4), duration: 0.1),
+            SKAction.moveTo(CGPointZero, duration: 0.1)
+        ])
+        
+        world.runAction(bump)
+    }
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         if gameState == .Ready {
             player.physicsBody?.affectedByGravity = true
@@ -227,6 +236,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, CollectableDelegate, GameOve
         player.update()
         
         if gameState == .Running && player.crashed {
+            bump()
             gameOver()
         }
         
